@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "YT2MP3 (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "YT2MP3 (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

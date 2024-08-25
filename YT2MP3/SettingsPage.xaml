@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="YT2MP3.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:YT2MP3"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <StackPanel Margin="20">
+        <ComboBox x:Name="PreferredFormatComboBox" Header="Preferred Format" SelectedValuePath="Tag">
+            <ComboBoxItem Content="MP3" Tag="mp3"/>
+            <ComboBoxItem Content="M4A" Tag="m4a"/>
+        </ComboBox>
+        <TextBox x:Name="DefaultSaveLocationTextBox" Header="Default Save Location" Margin="0,10,0,0"/>
+        <Button Content="Browse" Click="BrowseDefaultLocationButton_Click" Margin="0,10,0,0"/>
+        <ComboBox x:Name="AppThemeComboBox" Header="App Theme" SelectedValuePath="Tag" Margin="0,10,0,0">
+            <ComboBoxItem Content="Light" Tag="Light"/>
+            <ComboBoxItem Content="Dark" Tag="Dark"/>
+        </ComboBox>
+        <Button Content="Save Settings" Click="SaveSettingsButton_Click" Margin="0,20,0,0"/>
+    </StackPanel>
+</Page>

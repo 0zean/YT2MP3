@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35219.272
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YT2MP3", "YT2MP3\YT2MP3.csproj", "{FB1FEA7E-FA06-4C1C-9E63-659BA8F438D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB1FEA7E-FA06-4C1C-9E63-659BA8F438D8}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{FB1FEA7E-FA06-4C1C-9E63-659BA8F438D8}.Debug|ARM64.Build.0 = Debug|ARM64
+		{FB1FEA7E-FA06-4C1C-9E63-659BA8F438D8}.Debug|ARM64.Deploy.0 = Debug|ARM64
+		{FB1FEA7E-FA06-4C1C-9E63-659BA8F438D8}.Debug|x64.ActiveCfg = Debug|x64
+		{FB1FEA7E-FA06-4C1C-9E63-659BA8F438D8}.Debug|x64.Build.0 = Debug|x64
+		{FB1FEA7E-FA06-4C1C-9E63-659BA8F438D8}.Debug|x64.Deploy.0 = Debug|x64
+		{FB1FEA7E-FA06-4C1C-9E63-659BA8F438D8}.Debug|x86.ActiveCfg = Debug|x86
+		{FB1FEA7E-FA06-4C1C-9E63-659BA8F438D8}.Debug|x86.Build.0 = Debug|x86
+		{FB1FEA7E-FA06-4C1C-9E63-659BA8F438D8}.Debug|x86.Deploy.0 = Debug|x86
+		{FB1FEA7E-FA06-4C1C-9E63-659BA8F438D8}.Release|ARM64.ActiveCfg = Release|ARM64
+		{FB1FEA7E-FA06-4C1C-9E63-659BA8F438D8}.Release|ARM64.Build.0 = Release|ARM64
+		{FB1FEA7E-FA06-4C1C-9E63-659BA8F438D8}.Release|ARM64.Deploy.0 = Release|ARM64
+		{FB1FEA7E-FA06-4C1C-9E63-659BA8F438D8}.Release|x64.ActiveCfg = Release|x64
+		{FB1FEA7E-FA06-4C1C-9E63-659BA8F438D8}.Release|x64.Build.0 = Release|x64
+		{FB1FEA7E-FA06-4C1C-9E63-659BA8F438D8}.Release|x64.Deploy.0 = Release|x64
+		{FB1FEA7E-FA06-4C1C-9E63-659BA8F438D8}.Release|x86.ActiveCfg = Release|x86
+		{FB1FEA7E-FA06-4C1C-9E63-659BA8F438D8}.Release|x86.Build.0 = Release|x86
+		{FB1FEA7E-FA06-4C1C-9E63-659BA8F438D8}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6A9C3612-EB78-43D4-B0C6-69F0D8073BAC}
+	EndGlobalSection
+EndGlobal
