@@ -78,7 +78,8 @@ namespace YT2MP3
             {
                 Title = "Success",
                 Content = message,
-                CloseButtonText = "OK"
+                CloseButtonText = "OK",
+                XamlRoot = this.Content.XamlRoot
             };
 
             await dialog.ShowAsync();
