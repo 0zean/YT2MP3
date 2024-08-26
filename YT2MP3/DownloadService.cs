@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-using Microsoft.UI.Xaml.Controls;
 
 namespace YT2MP3
 {
@@ -10,7 +9,13 @@ namespace YT2MP3
     {
         public async Task<bool> DownloadAudio(string url, string outputPath, bool isPlaylist, string format)
         {
-            string arguments = $"-x --audio-format {format} -o \"{Path.Combine(outputPath, "%(title)s.%(ext)s")}\" ";
+            string ytDlpPath = GetYtDlpPath();
+            if (string.IsNullOrEmpty(ytDlpPath))
+            {
+                throw new FileNotFoundException("yt-dlp.exe not found in PATH");
+            }
+
+            string arguments = $"-x --audio-format {format} -o \"{Path.Combine(outputPath, "%(title)s.%(ext)s")}\" --format bestaudio --extract-audio ";
 
             if (isPlaylist)
             {
@@ -29,7 +34,7 @@ namespace YT2MP3
                 {
                     StartInfo = new ProcessStartInfo
                     {
-                        FileName = "yt-dlp",
+                        FileName = ytDlpPath,
                         Arguments = arguments,
                         UseShellExecute = false,
                         RedirectStandardOutput = true,
@@ -49,6 +54,20 @@ namespace YT2MP3
                 Console.WriteLine($"An error occurred: {ex.Message}");
                 return false;
             }
+        }
+
+        private string GetYtDlpPath()
+        {
+            string[] paths = Environment.GetEnvironmentVariable("PATH").Split(Path.PathSeparator);
+            foreach (string path in paths)
+            {
+                string fullPath = Path.Combine(path, "yt-dlp.exe");
+                if (File.Exists(fullPath))
+                {
+                    return fullPath;
+                }
+            }
+            return null;
         }
     }
 }
