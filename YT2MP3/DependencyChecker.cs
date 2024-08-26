@@ -1,8 +1,9 @@
-﻿using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
+﻿using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace YT2MP3
 {
@@ -10,8 +11,8 @@ namespace YT2MP3
     {
         public static async Task<bool> CheckAndInstallDependencies(XamlRoot xamlRoot)
         {
-            bool ytDlpInstalled = await CheckYtDlp();
-            bool ffmpegInstalled = await CheckFfmpeg();
+            bool ytDlpInstalled = CheckYtDlp();
+            bool ffmpegInstalled = CheckFfmpeg();
 
             if (!ytDlpInstalled || !ffmpegInstalled)
             {
@@ -21,14 +22,30 @@ namespace YT2MP3
             return true;
         }
 
-        private static async Task<bool> CheckYtDlp()
+        private static bool CheckYtDlp()
         {
-            return await CheckCommand("yt-dlp", "--version");
+            string[] paths = Environment.GetEnvironmentVariable("PATH").Split(Path.PathSeparator);
+            foreach (string path in paths)
+            {
+                if (File.Exists(Path.Combine(path, "yt-dlp.exe")))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
-        private static async Task<bool> CheckFfmpeg()
+        private static bool CheckFfmpeg()
         {
-            return await CheckCommand("ffmpeg", "-version");
+            string[] paths = Environment.GetEnvironmentVariable("PATH").Split(Path.PathSeparator);
+            foreach (string path in paths)
+            {
+                if (File.Exists(Path.Combine(path, "ffmpeg.exe")))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private static async Task<bool> CheckCommand(string command, string arguments)
@@ -89,6 +106,16 @@ namespace YT2MP3
                 };
 
                 await installDialog.ShowAsync();
+
+                ContentDialog restartDialog = new ContentDialog
+                {
+                    Title = "Restart Required",
+                    Content = "The application needs to be restarted for the changes to take effect. Please restart the application.",
+                    CloseButtonText = "OK",
+                    XamlRoot = xamlRoot
+                };
+
+                await restartDialog.ShowAsync();
 
                 // Return true assuming installation was successful
                 return true;
