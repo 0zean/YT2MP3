@@ -1,24 +1,21 @@
-﻿using System;
+﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using System;
 using System.Diagnostics;
-using System.IO;
 using System.Threading.Tasks;
-using Windows.Storage;
 
 namespace YT2MP3
 {
     public static class DependencyChecker
     {
-        public static async Task<bool> CheckAndInstallDependencies()
+        public static async Task<bool> CheckAndInstallDependencies(XamlRoot xamlRoot)
         {
             bool ytDlpInstalled = await CheckYtDlp();
             bool ffmpegInstalled = await CheckFfmpeg();
 
             if (!ytDlpInstalled || !ffmpegInstalled)
             {
-                // Prompt user to install missing dependencies
-                // For simplicity, we'll just return false here
-                // In a real application, you'd show a dialog and handle the installation process
-                return false;
+                return await PromptForInstallation(xamlRoot, !ytDlpInstalled, !ffmpegInstalled);
             }
 
             return true;
@@ -59,6 +56,45 @@ namespace YT2MP3
             {
                 return false;
             }
+        }
+
+        private static async Task<bool> PromptForInstallation(XamlRoot xamlRoot, bool needYtDlp, bool needFfmpeg)
+        {
+            string message = "The following dependencies are missing:\n";
+            if (needYtDlp) message += "- yt-dlp\n";
+            if (needFfmpeg) message += "- ffmpeg\n";
+            message += "\nWould you like to install them now?";
+
+            ContentDialog dialog = new ContentDialog
+            {
+                Title = "Missing Dependencies",
+                Content = message,
+                PrimaryButtonText = "Install",
+                CloseButtonText = "Cancel",
+                XamlRoot = xamlRoot
+            };
+
+            ContentDialogResult result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                // Here you would implement the actual installation process
+                // For now, we'll just show a message
+                ContentDialog installDialog = new ContentDialog
+                {
+                    Title = "Installation",
+                    Content = "Installing dependencies... (This is a placeholder, actual installation not implemented)",
+                    CloseButtonText = "OK",
+                    XamlRoot = xamlRoot
+                };
+
+                await installDialog.ShowAsync();
+
+                // Return true assuming installation was successful
+                return true;
+            }
+
+            return false;
         }
     }
 }
