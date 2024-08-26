@@ -13,6 +13,16 @@ namespace YT2MP3
             this.InitializeComponent();
             SettingsManager.ApplyTheme(this);
             ContentFrame.Navigate(typeof(DownloadPage));
+            this.Activated += MainWindow_Activated;
+        }
+
+        private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
+        {
+            if (args.WindowActivationState != WindowActivationState.Deactivated)
+            {
+                this.Activated -= MainWindow_Activated;
+                CheckDependencies();
+            }
         }
 
         private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -21,6 +31,26 @@ namespace YT2MP3
             {
                 var navItemTag = args.SelectedItemContainer.Tag.ToString();
                 NavView_Navigate(navItemTag);
+            }
+        }
+
+        private async void CheckDependencies()
+        {
+            if (Content?.XamlRoot != null)
+            {
+                bool dependenciesInstalled = await DependencyChecker.CheckAndInstallDependencies(Content.XamlRoot);
+                if (!dependenciesInstalled)
+                {
+                    ContentDialog warningDialog = new ContentDialog
+                    {
+                        Title = "Warning",
+                        Content = "Some dependencies are missing. The application may not function correctly.",
+                        CloseButtonText = "OK",
+                        XamlRoot = Content.XamlRoot
+                    };
+
+                    await warningDialog.ShowAsync();
+                }
             }
         }
 
