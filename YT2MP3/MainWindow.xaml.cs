@@ -2,7 +2,10 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Windows.UI.ApplicationSettings;
 using System;
-
+using Microsoft.UI;
+using WinRT.Interop;
+using Microsoft.UI.Windowing;
+using Windows.Graphics;
 
 namespace YT2MP3
 {
@@ -14,6 +17,21 @@ namespace YT2MP3
             SettingsManager.ApplyTheme(this);
             ContentFrame.Navigate(typeof(DownloadPage));
             this.Activated += MainWindow_Activated;
+
+            // Set window size
+            this.Activate();
+            var hwnd = WindowNative.GetWindowHandle(this);
+
+            // Get the WindowId from the hwnd
+            WindowId windowId = Win32Interop.GetWindowIdFromWindow(hwnd);
+
+            // Get the AppWindow from the WindowId
+            AppWindow appWindow = AppWindow.GetFromWindowId(windowId);
+
+            // Resize the window
+            appWindow.Resize(new SizeInt32(640, 480));
+
+            CustomizeTitleBar();
         }
 
         private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
@@ -70,6 +88,48 @@ namespace YT2MP3
             {
                 ContentFrame.Navigate(_page);
             }
+        }
+
+        private void CustomizeTitleBar()
+        {
+            // Get the AppWindow
+            var appWindow = GetAppWindowForCurrentWindow();
+
+            if (appWindow != null)
+            {
+                // Enable Mica
+                appWindow.TitleBar.ExtendsContentIntoTitleBar = true;
+
+                // Set the title bar colors
+                appWindow.TitleBar.ButtonBackgroundColor = Colors.Transparent;
+
+                if (SettingsManager.AppTheme == (ElementTheme)1)  // Light theme
+                {
+                    appWindow.TitleBar.ButtonForegroundColor = Colors.Black;
+                }
+                else if (SettingsManager.AppTheme == (ElementTheme)2)  // Dark theme
+                {
+                    appWindow.TitleBar.ButtonForegroundColor = Colors.White;
+                }
+
+                appWindow.TitleBar.ButtonHoverBackgroundColor = Colors.LightGray;
+                appWindow.TitleBar.ButtonHoverForegroundColor = Colors.Black;
+                appWindow.TitleBar.ButtonPressedBackgroundColor = Colors.Gray;
+                appWindow.TitleBar.ButtonPressedForegroundColor = Colors.White;
+                appWindow.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+                appWindow.TitleBar.ButtonInactiveForegroundColor = Colors.Gray;
+
+                // Set the window's background to Mica
+                appWindow.TitleBar.BackgroundColor = Colors.Transparent;
+
+            }
+        }
+
+        private AppWindow GetAppWindowForCurrentWindow()
+        {
+            IntPtr hWnd = WindowNative.GetWindowHandle(this);
+            WindowId wndId = Win32Interop.GetWindowIdFromWindow(hWnd);
+            return AppWindow.GetFromWindowId(wndId);
         }
     }
 }
