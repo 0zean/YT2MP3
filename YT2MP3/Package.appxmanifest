@@ -8,11 +8,11 @@
   IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="db65290e-de1b-48dc-9d5c-433b4ad8f2b1"
+    Name="05cf83e0-70d9-40b2-8a08-5fca5db81725"
     Publisher="CN=Nick"
-    Version="1.0.0.0" />
+    Version="1.0.1.0" />
 
-  <mp:PhoneIdentity PhoneProductId="db65290e-de1b-48dc-9d5c-433b4ad8f2b1" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="05cf83e0-70d9-40b2-8a08-5fca5db81725" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>YT2MP3</DisplayName>
