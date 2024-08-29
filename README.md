@@ -42,7 +42,7 @@ YT2MP3 is a WinUI 3 desktop application built using C#. This app is built around
     - Start the application by pressing `F5` in Visual Studio.
 
 6. **Optionally Install the App**:
-    - By selecting "Package and Publish" in Visual Studio you can generate an MSIX installer to install the app on your PC.
+    - By right-clicking the `.csproj` file in Visual Studio, you can select "Package and Publish" -> "Create App Packages" to generate an MSIX installer to install the app on your PC.
 
 ## Usage
 
