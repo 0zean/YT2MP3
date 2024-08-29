@@ -35,11 +35,14 @@ YT2MP3 is a WinUI 3 desktop application built using C#. This app is built around
 3. **Build the Project**:
     - Ensure all dependencies are restored, and build the solution.
 
-4. **Install yt-dlp**:
-    - Run the `InstallScripts.ps1` PowerShell script to install or update `yt-dlp`.
+4. **Install yt-dlp and ffmpeg**:
+    - Run the `InstallScripts.ps1` PowerShell script to install or update `yt-dlp` and `ffmepg`.
 
 5. **Run the App**:
     - Start the application by pressing `F5` in Visual Studio.
+
+6. **Optionally Install the App**:
+    - By selecting "Package and Publish" in Visual Studio you can generate an MSIX installer to install the app on your PC.
 
 ## Usage
 
