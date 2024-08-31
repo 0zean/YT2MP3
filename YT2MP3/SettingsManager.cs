@@ -19,18 +19,10 @@ namespace YT2MP3
             set => localSettings.Values["DefaultSaveLocation"] = value;
         }
 
-        public static ElementTheme AppTheme
+        public static int themeSetting
         {
-            get => (ElementTheme)((int?)localSettings.Values["AppTheme"] ?? (int)ElementTheme.Default);
-            set => localSettings.Values["AppTheme"] = (int)value;
-        }
-
-        public static void ApplyTheme(Window window)
-        {
-            if (window.Content is FrameworkElement rootElement)
-            {
-                rootElement.RequestedTheme = AppTheme;
-            }
+            get => ((int?)localSettings.Values["themeSetting"] ?? 1);
+            set => localSettings.Values["themeSetting"] = (int)value;
         }
     }
 }
