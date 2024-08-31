@@ -6,6 +6,7 @@ using Microsoft.UI;
 using WinRT.Interop;
 using Microsoft.UI.Windowing;
 using Windows.Graphics;
+using Windows.Storage;
 
 namespace YT2MP3
 {
@@ -14,7 +15,7 @@ namespace YT2MP3
         public MainWindow()
         {
             this.InitializeComponent();
-            SettingsManager.ApplyTheme(this);
+
             ContentFrame.Navigate(typeof(DownloadPage));
             this.Activated += MainWindow_Activated;
 
@@ -103,11 +104,11 @@ namespace YT2MP3
                 // Set the title bar colors
                 appWindow.TitleBar.ButtonBackgroundColor = Colors.Transparent;
 
-                if (SettingsManager.AppTheme == (ElementTheme)1)  // Light theme
+                if ((int)SettingsManager.themeSetting == 0)  // Light theme
                 {
                     appWindow.TitleBar.ButtonForegroundColor = Colors.Black;
                 }
-                else if (SettingsManager.AppTheme == (ElementTheme)2)  // Dark theme
+                else if ((int)SettingsManager.themeSetting == 1)  // Dark theme
                 {
                     appWindow.TitleBar.ButtonForegroundColor = Colors.White;
                 }
