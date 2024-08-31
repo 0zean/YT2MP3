@@ -4,6 +4,9 @@ using Microsoft.UI.Xaml.Controls;
 using Windows.Storage.Pickers;
 using System.Runtime.InteropServices;
 using WinRT;
+using Microsoft.UI;
+using WinRT.Interop;
+using Windows.Storage;
 
 namespace YT2MP3
 {
@@ -15,11 +18,24 @@ namespace YT2MP3
             LoadSettings();
         }
 
+        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            // Save theme choice to LocalSettings. 
+            // ApplicationTheme enum values: 0 = Light, 1 = Dark
+            ApplicationData.Current.LocalSettings.Values["themeSetting"] =
+                                                             ((ToggleSwitch)sender).IsOn ? 0 : 1;
+        }
+
+        private void ToggleSwitch_Loaded(object sender, RoutedEventArgs e)
+        {
+            ((ToggleSwitch)sender).IsOn = App.Current.RequestedTheme == ApplicationTheme.Light;
+        }
+
         private void LoadSettings()
         {
             PreferredFormatComboBox.SelectedValue = SettingsManager.PreferredFormat;
             DefaultSaveLocationTextBox.Text = SettingsManager.DefaultSaveLocation;
-            AppThemeComboBox.SelectedValue = SettingsManager.AppTheme.ToString();
+            //AppThemeComboBox.SelectedValue = SettingsManager.AppTheme.ToString();
         }
 
         private async void BrowseDefaultLocationButton_Click(object sender, RoutedEventArgs e)
@@ -42,15 +58,12 @@ namespace YT2MP3
         {
             SettingsManager.PreferredFormat = (string)PreferredFormatComboBox.SelectedValue;
             SettingsManager.DefaultSaveLocation = DefaultSaveLocationTextBox.Text;
-            SettingsManager.AppTheme = (ElementTheme)Enum.Parse(typeof(ElementTheme), (string)AppThemeComboBox.SelectedValue);
-
-            SettingsManager.ApplyTheme(App.MainWindow);
 
             // Show a confirmation message
             var dialog = new ContentDialog
             {
                 Title = "Settings Saved",
-                Content = "Your settings have been saved successfully.",
+                Content = "Your settings have been saved successfully.\n(Restart app to apply theme change)",
                 CloseButtonText = "OK",
                 XamlRoot = this.Content.XamlRoot
             };
