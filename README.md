@@ -1,6 +1,6 @@
 # YT2MP3
 
-YT2MP3 is a WinUI 3 desktop application built using C#. This app is built around `yt-dlp` to download audio from YouTube using and `ffmpeg` to handle audio types. The app is designed around the Windows 11 Mica theme and is intended to simplify the `yt-dlp` experience.
+YT2MP3 is a WinUI 3 desktop application built using C#. This app is built around `yt-dlp` to download audio from YouTube and `ffmpeg` to handle audio types. The app is designed around the Windows 11 Mica theme and is intended to simplify the `yt-dlp` experience.
 
 <p align="center">
   <img src="YT2MP3/Assets/demo.png" />
